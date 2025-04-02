@@ -37,6 +37,7 @@
             </div>
 
             <div class="col-md-12 p-3">
+                {{ $registros->links('pagination::bootstrap-4') }}
                 <div class="card">
                     <div class="card-header font-weight-bold">
                         {{--  <a href="{{ route('registros/create') }}" class="float-right">Crear registro</a>  --}}
@@ -64,8 +65,22 @@
                                         <td>{{ $registro->cotizaciones->count() }}</td>
                                         <td>
                                             <a href="{{ route('/registros/show', $registro->id) }}">Abrir registro</a>
-                                            <br>
-                                            <a href="{{ route('/registros/edit', $registro->id) }}">Editar registro</a>
+                                            @if (($registro->estatus == 'PENDIENTE' && Auth::user()->id == $registro->user_id) || Auth::user()->rol_id == 1)
+                                                <br>
+                                                <a href="{{ route('/registros/edit', $registro->id) }}">Editar registro</a>
+                                            @endif
+                                            @if (Auth::user()->rol_id == 1)
+                                                <br>
+                                                <a href="javascript:void(0)"
+                                                    onclick="eliminarRegistro({{ $registro->id }})"
+                                                    class="text-danger">Elminar registro</a>
+                                                <form action="{{ route('/registros/destroy', $registro->id) }}"
+                                                    id="form_registros_delete_{{ $registro->id }}" style="display:none"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @empty

@@ -20,4 +20,12 @@ class CotizacionController extends Controller
             return redirect()->back()->with('mensaje', "Cotización agregada");
         }
     }
+
+    public function destroy($id)
+    {
+        $cotizacion = Cotizacion::findOrFail($id);
+        if ($cotizacion->delete()) {
+            return redirect()->back()->with('mensaje', 'Cotizacion eliminado');
+        }
+    }
 }

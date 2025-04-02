@@ -12,15 +12,6 @@
 
     <!-- Scripts -->
     {{--  <script src="{{ asset('js/app.js') }}" defer></script>  --}}
-    <script>
-        window.agregarProducto = () => {
-            $("#modal_create_producto").modal("show");
-        };
-        window.agregarProveedor = () => {
-            $("#modal_create_proveedor").modal("show");
-        };
-    </script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -42,7 +33,49 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Inputmask("99999999.99", {
+                numericInput: true,
+                placeholder: "",
+                rightAlign: false
+            }).mask(".precio");
+        });
+        window.agregarProducto = () => {
+            $("#modal_create_producto").modal("show");
+        };
+        window.agregarProveedor = () => {
+            $("#modal_create_proveedor").modal("show");
+        };
+        window.eliminarRegistro = id => {
+            alertify.confirm("Eliminar", "¿Eliminar registro?",
+                function() {
+                    $("#form_registros_delete_" + id).submit();
+                },
+                function() {
 
+                });
+        };
+        window.eliminarCotizacion = id => {
+            alertify.confirm("Eliminar", "¿Eliminar cotizacion?",
+                function() {
+                    $("#form_contizacion_delete_" + id).submit();
+                },
+                function() {
+
+                });
+        };
+        window.cerrarRegistro = id => {
+            alertify.confirm("Terminar", "¿Cerrar registro?",
+                function() {
+                    $("#form_registros_cerrar_" + id).submit();
+                },
+                function() {
+
+                });
+        };
+    </script>
 </head>
 
 <body>
@@ -87,10 +120,23 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    {{--  <a class="dropdown-item" href="{{ route('users') }}">
+                                        Usuarios
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('productos') }}">
+                                        Productos
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('proveedor') }}">
+                                        Proveedores
+                                    </a>  --}}
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Salir
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

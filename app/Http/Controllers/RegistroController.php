@@ -11,7 +11,7 @@ class RegistroController extends Controller
 {
     public function index()
     {
-        $registros = Registro::orderBy('created_at', 'DESC')->get();
+        $registros = Registro::orderBy('created_at', 'DESC')->paginate(1);
         $productos = Producto::orderBy('nombre', 'ASC')->get();
         return view('registro.index', compact('registros', 'productos'));
     }
@@ -40,5 +40,22 @@ class RegistroController extends Controller
         $registro = Registro::findOrFail($id);
         $proveedores = Proveedor::orderBy('nombre', 'ASC')->get();
         return view('registro.edit', compact('registro', 'proveedores'));
+    }
+
+    public function destroy($id)
+    {
+        $registro = Registro::findOrFail($id);
+        if ($registro->delete()) {
+            return redirect()->back()->with('mensaje', 'Registro eliminado');
+        }
+    }
+
+    public function cerrar($id)
+    {
+        $registro = Registro::findOrFail($id);
+        $registro->estatus = 'CERRADO';
+        if ($registro->save()) {
+            return redirect()->route('registros')->with('mensaje', 'Registro actualizado');
+        }
     }
 }

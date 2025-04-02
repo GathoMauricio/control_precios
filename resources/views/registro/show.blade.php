@@ -8,13 +8,13 @@
                     <div class="card-header font-weight-bold">
                         {{ $registro->producto->nombre }}
                         <br>
-                        <i>{{ $registro->producto->descripcion }}</i>
+                        <i>{{ $registro->producto->descripcion }} - {{ explode(' ', $registro->created_at)[0] }}</i>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Fecha</th>
+                                    <th>Fecha cotización</th>
                                     <th>Proveedor</th>
                                     <th>Costo</th>
                                 </tr>
@@ -22,9 +22,9 @@
                             <tobdy>
                                 @forelse ($registro->cotizaciones as $coizacion)
                                     <tr>
-                                        <td>Fecha</td>
-                                        <td>Proveedor</td>
-                                        <td>Costo</td>
+                                        <td>{{ explode(' ', $coizacion->created_at)[0] }}</td>
+                                        <td>{{ $coizacion->proveedor->nombre }}</td>
+                                        <td>${{ $coizacion->precio }}</td>
                                     </tr>
                                 @empty
                                     <tr>
