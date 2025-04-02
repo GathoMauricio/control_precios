@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Registro;
 use App\Models\Producto;
 use App\Models\Proveedor;
+use App\Models\Unidad;
 
 class RegistroController extends Controller
 {
     public function index()
     {
-        $registros = Registro::orderBy('created_at', 'DESC')->paginate(1);
+        $registros = Registro::orderBy('created_at', 'DESC')->paginate(15);
         $productos = Producto::orderBy('nombre', 'ASC')->get();
-        return view('registro.index', compact('registros', 'productos'));
+        $unidades = Unidad::orderBy('nombre', 'ASC')->get();
+        return view('registro.index', compact('registros', 'productos', 'unidades'));
     }
 
     public function show($id)

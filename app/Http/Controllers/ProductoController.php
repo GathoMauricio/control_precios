@@ -13,7 +13,7 @@ class ProductoController extends Controller
             'user_id' => \Auth::user()->id,
             'nombre' => strtoupper($request->nombre),
             'descripcion' => $request->descripcion,
-            'unidad' => $request->unidad,
+            'unidad_id' => $request->unidad_id,
         ]);
         if ($producto) {
             return redirect()->back()->with('mensaje', "Producto agregado");

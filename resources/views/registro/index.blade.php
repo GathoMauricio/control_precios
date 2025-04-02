@@ -21,8 +21,8 @@
                                                 existe aún --
                                             </option>
                                             @foreach ($productos as $producto)
-                                                <option value="{{ $producto->id }}">{{ $producto->unidad }}
-                                                    {{ $producto->nombre }} -
+                                                <option value="{{ $producto->id }}">
+                                                    {{ $producto->nombre }} {{ $producto->unidadd->nombre }} -
                                                     {{ $producto->descripcion }}</option>
                                             @endforeach
                                         </select>
@@ -63,7 +63,7 @@
                                         <td>{{ explode(' ', $registro->created_at)[0] }}</td>
                                         <td>{{ $registro->estatus }}</td>
                                         <td>{{ $registro->producto->nombre }}</td>
-                                        <td>{{ $registro->producto->unidad }}</td>
+                                        <td>{{ $registro->producto->unidadd->nombre }}</td>
                                         <td>{{ $registro->usuario->name }}</td>
                                         <td>{{ $registro->cotizaciones->count() }}</td>
                                         <td>

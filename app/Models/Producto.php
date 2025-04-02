@@ -15,13 +15,18 @@ class Producto extends Model
 
     protected $fillable = [
         'user_id',
+        'unidad_id',
         'nombre',
         'descripcion',
-        'unidad',
     ];
 
     public function usuario()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function unidadd()
+    {
+        return $this->hasOne(Unidad::class, 'id', 'unidad_id')->withDefault();
     }
 }
