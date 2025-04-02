@@ -21,6 +21,8 @@ Route::put('/registros/cerrar/{id}', [App\Http\Controllers\RegistroController::c
 Route::get('productos', [App\Http\Controllers\ProductoController::class, 'index'])->name('productos');
 Route::post('productos/store', [App\Http\Controllers\ProductoController::class, 'store'])->name('productos/store');
 
+Route::post('unidades/store', [App\Http\Controllers\UnidadController::class, 'store'])->name('unidades/store');
+
 Route::get('proveedor', [App\Http\Controllers\ProveedorController::class, 'index'])->name('proveedor');
 Route::post('proveedor/store', [App\Http\Controllers\ProveedorController::class, 'store'])->name('proveedor/store');
 

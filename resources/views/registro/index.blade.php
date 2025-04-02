@@ -7,6 +7,8 @@
                 <div class="card">
                     <div class="card-header font-weight-bold">
                         <a href="javascript:void(0);" onclick="agregarProducto();" style="float:right">Agregar producto</a>
+                        <br>
+                        <a href="javascript:void(0);" onclick="agregarUnidad();" style="float:right">Agregar unidad</a>
                         Crear registro
                     </div>
                     <div class="card-body">
@@ -99,4 +101,5 @@
         </div>
     </div>
     @include('producto.create')
+    @include('unidad.create')
 @endsection

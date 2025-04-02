@@ -45,6 +45,9 @@
         window.agregarProducto = () => {
             $("#modal_create_producto").modal("show");
         };
+        window.agregarUnidad = () => {
+            $("#modal_create_unidad").modal("show");
+        };
         window.agregarProveedor = () => {
             $("#modal_create_proveedor").modal("show");
         };
