@@ -88,7 +88,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <th colspan="6" class="text-center">Sin registros</th>
+                                        <th colspan="7" class="text-center">Sin registros</th>
                                     </tr>
                                 @endforelse
                             </tbody>
