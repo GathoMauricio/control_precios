@@ -52,6 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header font-weight-bold">
+                        (UNIDAD {{ $registro->producto->unidad }})
                         {{ $registro->producto->nombre }}
                         <br>
                         <i>{{ $registro->producto->descripcion }} - {{ explode(' ', $registro->created_at)[0] }}</i>

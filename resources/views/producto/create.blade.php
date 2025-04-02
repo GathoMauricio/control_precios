@@ -12,6 +12,14 @@
                     <input type="text" name="nombre" placeholder="NOMBRE DEL PRODUCTO..."
                         class="form-control mayusculas" required />
                     <br>
+                    <select name="unidad" class="form-control">
+                        <option value="METRO">METRO</option>
+                        <option value="PIEZA">PIEZA</option>
+                        <option value="DOCENA">DOCENA</option>
+                        <option value="PAR">PAR</option>
+                        <option value="OTRO">OTRO</option>
+                    </select>
+                    <br>
                     <textarea name="descripcion" placeholder="Descripción (Opcional)" class="form-control"></textarea>
                 </div>
                 <div class="modal-footer">
