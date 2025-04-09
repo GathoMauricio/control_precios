@@ -44,7 +44,11 @@
                 @if ($producto->registros->count())
                     <div class="card container_by_product">
                         <div class="card-header">
-                            <h6 class="text-center">{{ $producto->nombre }}</h6>
+                            <h6 class="text-center">
+                                {{ $producto->nombre }} - {{ $producto->unidad }}
+                                <br>
+                                {{ $producto->descripcion }}
+                            </h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
