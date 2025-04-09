@@ -9,15 +9,15 @@ class ProductoController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Producto::with(['usuario', 'unidadd']);
+        // $query = Producto::with(['usuario', 'unidadd'])->paginate(15);
 
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('nombre', 'LIKE', "%{$search}%")
-                ->orWhere('descripcion', 'LIKE', "%{$search}%");
-        }
+        // if ($request->has('search')) {
+        //     $search = $request->input('search');
+        //     $query->where('nombre', 'LIKE', "%{$search}%")
+        //         ->orWhere('descripcion', 'LIKE', "%{$search}%");
+        // }
 
-        $productos = $query->paginate(10); // Paginación de 10 elementos por página
+        $productos = Producto::orderBy('nombre')->paginate(15);
         return view('producto.index', compact('productos'));
     }
 

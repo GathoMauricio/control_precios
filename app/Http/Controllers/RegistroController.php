@@ -13,7 +13,7 @@ class RegistroController extends Controller
     public function index()
     {
         $registros = Registro::orderBy('created_at', 'DESC')->paginate(15);
-        $productos = Producto::orderBy('nombre', 'ASC')->get();
+        $productos = Producto::orderBy('nombre', 'ASC')->paginate(15);
         $unidades = Unidad::orderBy('nombre', 'ASC')->get();
         return view('registro.index', compact('registros', 'productos', 'unidades'));
     }

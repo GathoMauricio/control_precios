@@ -169,6 +169,7 @@
             $('.select2').select2();
         });
     </script>
+    @yield('custom-scripts')
 </body>
 
 </html>

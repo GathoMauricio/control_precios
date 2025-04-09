@@ -13,7 +13,7 @@
                         class="form-control mayusculas" required />
                     <br>
                     <select name="unidad_id" class="form-control">
-                        <option value>--Seleccione una opción--</option>
+                        <option value>--Seleccione una unidad--</option>
                         @foreach ($unidades as $unidad)
                             <option value="{{ $unidad->id }}">{{ $unidad->nombre }}</option>
                         @endforeach

@@ -9,7 +9,7 @@
                         <a href="javascript:void(0);" onclick="agregarProducto();" style="float:right">Agregar producto</a>
                         <br>
                         <a href="javascript:void(0);" onclick="agregarUnidad();" style="float:right">Agregar unidad</a>
-                        Crear registro
+                        <h5>Iniciar proceso de cotización</h5>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('/registros/store') }}" method="POST">
@@ -39,67 +39,73 @@
                 </div>
             </div>
 
-            <div class="col-md-12 p-3">
-                {{ $registros->links('pagination::bootstrap-4') }}
-                <div class="card">
-                    <div class="card-header font-weight-bold">
-                        {{--  <a href="{{ route('registros/create') }}" class="float-right">Crear registro</a>  --}}
-                        Registros
+            {{ $productos->links('pagination::bootstrap-4') }}
+            @foreach ($productos as $producto)
+                @if ($producto->registros->count())
+                    <div class="card container_by_product">
+                        <div class="card-header">
+                            <h6 class="text-center">{{ $producto->nombre }}</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach ($producto->registros as $registro)
+                                    @if ($registro->cotizaciones->count() > 0)
+                                        <div class="col-md-12 p-2">
+                                            <small>
+                                                {{ $registro->created_at }}
+                                                <span style="float:right"><i>{{ $registro->usuario->name }}</i></span>
+                                            </small>
+                                            <div>
+                                                @php
+                                                    $precios = $registro->cotizaciones->pluck('precio')->toArray();
+                                                @endphp
+                                                <table border="1" style="width:100%">
+                                                    <tr>
+
+                                                        @foreach ($registro->cotizaciones as $cotizacion)
+                                                            @if ($cotizacion->precio == min($precios))
+                                                                <td class="text-center bg-info">
+                                                                @else
+                                                                <td class="text-center">
+                                                            @endif
+                                                            <b>{{ $cotizacion->proveedor->nombre }}</b>
+                                                            </td>
+                                                        @endforeach
+                                                        <td class="text-center bg-info">
+                                                            <b>Ganador</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+
+                                                        @foreach ($registro->cotizaciones as $cotizacion)
+                                                            <td class="text-center">${{ $cotizacion->precio }}</td>
+                                                        @endforeach
+                                                        <td class="text-center">
+                                                            ${{ min($precios) }}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Estatus</th>
-                                    <th>Producto</th>
-                                    <th>Unidad</th>
-                                    <th>Usuario</th>
-                                    <th>Cotizaciones</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($registros as $registro)
-                                    <tr>
-                                        <td>{{ explode(' ', $registro->created_at)[0] }}</td>
-                                        <td>{{ $registro->estatus }}</td>
-                                        <td>{{ $registro->producto->nombre }}</td>
-                                        <td>{{ $registro->producto->unidadd->nombre }}</td>
-                                        <td>{{ $registro->usuario->name }}</td>
-                                        <td>{{ $registro->cotizaciones->count() }}</td>
-                                        <td>
-                                            <a href="{{ route('/registros/show', $registro->id) }}">Abrir registro</a>
-                                            @if (($registro->estatus == 'PENDIENTE' && Auth::user()->id == $registro->user_id) || Auth::user()->rol_id == 1)
-                                                <br>
-                                                <a href="{{ route('/registros/edit', $registro->id) }}">Editar registro</a>
-                                            @endif
-                                            @if (Auth::user()->rol_id == 1)
-                                                <br>
-                                                <a href="javascript:void(0)"
-                                                    onclick="eliminarRegistro({{ $registro->id }})"
-                                                    class="text-danger">Elminar registro</a>
-                                                <form action="{{ route('/registros/destroy', $registro->id) }}"
-                                                    id="form_registros_delete_{{ $registro->id }}" style="display:none"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <th colspan="7" class="text-center">Sin registros</th>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                @endif
+            @endforeach
+            {{ $productos->links('pagination::bootstrap-4') }}
         </div>
     </div>
     @include('producto.create')
     @include('unidad.create')
+@endsection
+@section('custom-scripts')
+    <style>
+        .container_by_product {
+            height: 300px;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+    </style>
 @endsection

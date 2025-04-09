@@ -32,6 +32,6 @@ class Producto extends Model
 
     public function registros()
     {
-        return $this->hasMany(Registro::class, 'producto_id', 'id');
+        return $this->hasMany(Registro::class, 'producto_id', 'id')->orderBy('created_at', 'DESC');
     }
 }
