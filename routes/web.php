@@ -18,8 +18,11 @@ Route::get('/registros/edit/{id}', [App\Http\Controllers\RegistroController::cla
 Route::delete('/registros/destroy/{id}', [App\Http\Controllers\RegistroController::class, 'destroy'])->name('/registros/destroy');
 Route::put('/registros/cerrar/{id}', [App\Http\Controllers\RegistroController::class, 'cerrar'])->name('/registros/cerrar');
 
-Route::get('productos', [App\Http\Controllers\ProductoController::class, 'index'])->name('productos');
+Route::get('productos', [App\Http\Controllers\ProductoController::class, 'index'])->name('productos.index');
+Route::get('productos/create', [App\Http\Controllers\ProductoController::class, 'create'])->name('productos.create');
+Route::get('productos/edit/{producto}', [App\Http\Controllers\ProductoController::class, 'edit'])->name('productos.edit');
 Route::post('productos/store', [App\Http\Controllers\ProductoController::class, 'store'])->name('productos/store');
+Route::delete('productos/{producto}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('productos.destroy');
 
 Route::post('unidades/store', [App\Http\Controllers\UnidadController::class, 'store'])->name('unidades/store');
 

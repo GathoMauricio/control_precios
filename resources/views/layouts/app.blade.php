@@ -127,6 +127,9 @@
                                         <a class="dropdown-item" href="{{ route('users.index') }}">
                                             Usuarios
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('productos.index') }}">
+                                            Productos
+                                        </a>
                                         {{--
                                     <a class="dropdown-item" href="{{ route('productos') }}">
                                         Productos

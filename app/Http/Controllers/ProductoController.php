@@ -7,6 +7,20 @@ use App\Models\Producto;
 
 class ProductoController extends Controller
 {
+    public function index(Request $request)
+    {
+        $query = Producto::with(['usuario', 'unidadd']);
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('nombre', 'LIKE', "%{$search}%")
+                ->orWhere('descripcion', 'LIKE', "%{$search}%");
+        }
+
+        $productos = $query->paginate(10); // Paginación de 10 elementos por página
+        return view('producto.index', compact('productos'));
+    }
+
     public function store(Request $request)
     {
         $producto = Producto::create([

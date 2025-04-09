@@ -29,4 +29,9 @@ class Producto extends Model
     {
         return $this->hasOne(Unidad::class, 'id', 'unidad_id')->withDefault();
     }
+
+    public function registros()
+    {
+        return $this->hasMany(Registro::class, 'producto_id', 'id');
+    }
 }
