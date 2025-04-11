@@ -14,8 +14,9 @@ class RegistroController extends Controller
     {
         $registros = Registro::orderBy('created_at', 'DESC')->paginate(15);
         $productos = Producto::orderBy('nombre', 'ASC')->paginate(15);
+        $productos_all = Producto::orderBy('nombre', 'ASC')->get();
         $unidades = Unidad::orderBy('nombre', 'ASC')->get();
-        return view('registro.index', compact('registros', 'productos', 'unidades'));
+        return view('registro.index', compact('registros', 'productos', 'unidades', 'productos_all'));
     }
 
     public function show($id)

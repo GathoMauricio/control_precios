@@ -22,7 +22,7 @@
                                                 -- Seleccione un producto de la lista o agregue uno nuevo solo si este no
                                                 existe aún --
                                             </option>
-                                            @foreach ($productos as $producto)
+                                            @foreach ($productos_all as $producto)
                                                 <option value="{{ $producto->id }}">
                                                     {{ $producto->nombre }} {{ $producto->unidadd->nombre }} -
                                                     {{ $producto->descripcion }}</option>
