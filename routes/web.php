@@ -38,3 +38,4 @@ Route::post('users', [App\Http\Controllers\UserController::class, 'store'])->nam
 Route::get('users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
 Route::put('users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
 Route::delete('users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+Route::put('update_password/{user}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('users.update_password');

@@ -33,5 +33,29 @@
                 </form>
             </div>
         </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header">
+                Password
+            </div>
+            <form action="{{ route('users.update_password', $user) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                        @error('password')
+                            <span style="color:red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirmar</label>
+                        <input type="password" name="password_confirmation" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">💾 Actualizar</button>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection

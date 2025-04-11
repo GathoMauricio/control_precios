@@ -76,4 +76,16 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'Usuario eliminado.');
     }
+
+    public function updatePassword(Request $request, $id)
+    {
+        // Validar los datos de entrada
+        $request->validate([
+            'password' => 'required|confirmed|min:6',
+        ]);
+        $user = User::find($id);
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return back()->with('mensaje', 'Contraseña actualizada correctamente.');
+    }
 }
