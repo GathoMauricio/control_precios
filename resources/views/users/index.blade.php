@@ -3,7 +3,8 @@
 @section('content')
     <div class="container mt-4">
         <h2 class="mb-3">Usuarios</h2>
-
+        <a href="{{ route('users.create') }}" style="float: right;">Crear usuario</a>
+        <br><br>
         <!-- Formulario de búsqueda -->
         <form action="{{ route('users.index') }}" method="GET" class="mb-3 d-flex">
             <input type="text" name="search" class="form-control me-2" placeholder="Buscar por nombre o email..."
